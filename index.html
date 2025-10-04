@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Test</title>
+    <link rel="icon" href="shiv.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    
+      <header>
+        <nav class="navbar">
+          <img src="shiv.png" alt="Logo" class="logo">
+          <ul class="nav-links" id="nav-links">
+            <li><a class="nav-link" href="#home">Home</a></li>
+            <li><a class="nav-link" href="#help">Help</a></li>
+            <li><a class="nav-link" href="#about">About</a></li>
+            <li><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+    
+
+    <h3>Typing Speed Test</h3>
+
+    <h1>Test your typing skills.</h1>
+    
+    <div id="home" class="container">
+        
+        
+        <div class="difficulty-container">
+            <label for="difficulty">Select Difficulty:</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        
+        <div class="typing-area">
+            <p id="text-display" class="text-box"></p>
+            <input type="text" id="text-input" placeholder="Start typing here..." disabled>
+        </div>
+        
+        <div class=" stats">
+            <div class="stat-box">
+                <p>⏳ Time Left: <span id="timer">60</span>s</p>
+            </div>
+            <div class="stat-box">
+                <p>⚡ WPM: <span id="wpm">0</span></p>
+            </div>
+            <div class="stat-box">
+                <p>🎯 Accuracy: <span id="accuracy">100</span>%</p>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button id="start-btn">🚀 Start Test</button>
+            <button id="end-btn">⏹ End Test</button>
+            <button id="reset-btn">🔄 Restart</button>
+        </div>
+        
+        <h2>🏆 Leaderboard</h2>
+        <ul id="leaderboard"></ul>
+    </div>
+
+
+    <hr class="custom-line">
+
+    <!-- ******* Help******* -->
+
+    <!-- <div  class="help"> -->
+
+    <div id="help" class="Help">
+
+        <h1 class="heading">How to type faster?</h1>
+        
+        <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/mmcF-mjtHgo" 
+              title="Typing Speed Test Demo"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+    </div>
+    
+
+    <hr class="custom-line">
+
+    <h1>Boost your typing speed.</h1>
+<div class="helping">
+    <div>
+<h2>How to Improve Your Typing Speed</h2>
+<p>Take a deep breath, relax your fingers, and take it slow. You need to be focused and not annoyed when attempting the typing speed test. The best thing you can do to start typing faster is to type more. The more practice you get under your belt, the faster your ‘typing-fu’ will be. It’s all about developing muscle memory. Just make sure you are reinforcing good habits and not ones that will leave your fingers hurting after an intense typing session.</p>
+</div>
+
+<div>
+<h2>What Is the Best 10-Finger Typing Layout?</h2>
+<p>Of course, you should use ten fingers for typing, but you can start with a layout that’s the most comfortable for you. The small bumps on the F and J keys will help your fingers locate the correct position without looking. This setup should give you a full range of motion. The more you type, the faster you will get. There are a few alternative layouts that propose a more ergonomic approach to typing. You could also take the big leap and try out the Dvorak keyboard, but that’s a different story.</p>
+</div>
+
+<div>
+    <h2>Who Invented the Qwerty Keyboard?</h2>
+    <p>The QWERTY keyboard was invented in 1868 by Christopher Latham Sholes. He also designed the first successful typewriter. The order of the keys was decided by listing the most common letter combinations and making sure that they were not placed next to each other. He did this to avoid problems that often happened when two neighboring keys were pressed consecutively. The QWERTY keyboard is used to this day and is the most widely used keyboard available.</p>
+</div>
+</div>
+
+<div class="helping1">
+    <div>
+        <h2>Word per Minute (WPM) Typing Test</h2>
+        <p>What is the WPM typing test? There are different types of tests for typing. This one is a typing test that expresses your typing skills in words per minute. The more you practice typing, and the more you test your typing speed, the higher your WPM score will be. Some online typing tests and typing test games focus only on WPM typing. The disadvantage of the WPM typing test is that you are only learning how to type fast. WPM typing tests do not show your accuracy.</p>
+    </div>
+
+    <div>
+        <h2>Is This Really a Free Typing Test You Can Use?</h2>
+        <p>As the makers of Typomaster, customer service software for businesses, we wanted to provide the community of our customers and live chat agents with a free typing test. This way, they can consistently practice typing and improve their typing skills. We've also made this tool accessible to every visitor of our page. Our tool is a free typing speed test with a WPM score, but it can be also used as a typing speed test for kids.</p>
+    </div>
+
+    <div>
+        <h2>How Can You Upgrade Your Typing Skills?</h2>
+        <p>Practice typing as much as you can. Type a lot, type tests, and practice typing tests. Improve your words per minute typing results, and test your typing speed often. Our typing speed test will keep track of all typing tests that you’ve taken in the past so you will be able to see the improvements over time. You will be able to see how your speed typing has changed. If you can do a five-minute typing test every day, your typing skills will increase dramatically.</p>
+    </div>
+</div>
+
+
+<div class="helping2">
+
+    <div>
+        <h2>Why Is Typing Speed Important to Everyone?</h2>
+        <p>The faster you type, the faster you will be able to communicate with others. You will be able to save a ton of time on any kind of work that requires typing. At first, it will be a couple of extra minutes that you won’t really notice. Over time, the minutes will turn into hours of saved time that you can spend on other activities.</p>
+    </div>
+
+    <div>
+        <h2>What Is the Average Typing Speed?</h2>
+        <p>The average person types between 38 and 40 words per minute (WPM). That translates into between 190 and 200 characters per minute (CPM). However, professional typists type a lot faster, averaging between 65 and 75 WPM.</p>
+    </div>
+
+    <div>
+       <h2>How Many Words per Minute Is a Good Score?</h2>
+       <p>An average professional typist usually types around 65 to 75 WPM. More advanced positions require 80 to 95 (this is typically the minimum required for dispatch positions and other time-sensitive typing jobs). There are also some advanced typists whose work requires speeds above 120 WPM.</p>
+    </div>
+</div>
+    
+
+
+<hr class="custom-line">
+<!-- ****** about ****** -->
+
+
+    <h2 class="shiv">👤 About Us</h2>
+    <hr class="section-divider">
+    <section id="about" class="about-section">
+<div>
+    <p>
+      Welcome to our Typing Speed Test platform — your go-to place to boost typing skills with fun and precision!
+    </p>
+  
+    <p>
+      Whether you're a student, professional, or just someone who wants to type faster, this tool is built for you. 
+      Test your typing speed in real-time, challenge yourself with different difficulty levels, track your accuracy, 
+      and even compete with others on the leaderboard!
+    </p>
+  
+    <p>
+      We believe that typing should be both productive and fun. That's why we've designed this experience to be fast, interactive, and motivating. 
+      You can start, pause, or restart your test at any time — and if you're feeling competitive, try to beat your high score!
+    </p>
+  
+    <p>
+      Ready to type like a pro? Hit the start button and let your fingers fly!
+    </p>
+</div> 
+  
+
+  <div class="picture">
+
+    <div class="img1">
+    <img class="pic" src="typewriter-1248088_1280.jpg" alt="1">
+</div>
+
+<div class="img2">
+    <img class="pic" src="keyboard-4498456_1280.webp" alt="2">
+</div>
+
+<div class="img3">
+    <img class="pic" src="laptop-8556518_1280.webp" alt="3">
+</div>
+
+<div class="img4">
+    <img class="pic" src="girl-791177_1280.jpg" alt="4">
+</div>
+
+  </div>
+
+</section>
+
+  <hr class="custom-line">
+
+  <!-- ***** contact ***** -->
+
+  <section id="contact" class="contact-section">
+    <h2>📞 Contact Us</h2>
+    <hr class="section-divider">
+  
+    <p>If you have any questions, feedback, or suggestions — we’d love to hear from you!</p>
+    <p class="phone">📱 Phone: <a href="tel:+916200747304">+91 6200747304</a></p>
+  
+    <!-- Flex container for form + links -->
+    <div class="contact-flex-wrapper">
+      <form class="contact-form" action="#" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+        <button type="submit">📤 Send Message</button>
+      </form>
+  
+      <div class="social-links">
+        <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/yourprofile" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/shivam-kumar-8578b3329?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  
+  <div class="copyright">
+    <p> Copyright <i class="fa-solid fa-copyright"></i> 2025 Shivam Made with <i class="fa-solid fa-heart"></i>  </p>
+</div>
+  
+
+
+
+    
+
+  
+
+    <script src="script.js"></script>
+</body>
+</html>
+
