@@ -1,7 +1,5 @@
 
-       // ---------------- Typing Test ----------------
-
-// Selecting elements
+ // Selecting elements
 const textDisplay = document.getElementById("text-display");
 const textInput = document.getElementById("text-input");
 const timerDisplay = document.getElementById("timer");
@@ -13,7 +11,7 @@ const resetBtn = document.getElementById("reset-btn");
 const difficultySelect = document.getElementById("difficulty");
 const leaderboardList = document.getElementById("leaderboard");
 
-// Make.com Webhook URL for Typing Test
+// Make.com Webhook URL
 const makeWebhookURL = "https://hook.eu2.make.com/pishwlug5vswcnyz12133xck8taumums";
 
 // Typing Test Texts
@@ -29,12 +27,14 @@ let isTyping = false;
 let correctChars = 0;
 let totalTyped = 0;
 let startTime;
-let userName = "Anonymous"; // default
+let userName = "Anonymous";
+let userEmail = "";
 
-// ---------------- Make.com Integration ----------------
-function sendResultsToMake(name, wpm, accuracy, difficulty) {
+// --- Make.com Integration Function ---
+function sendResultsToMake(name, email, wpm, accuracy, difficulty) {
   const data = {
     name: name || "Anonymous",
+    email: email || "",
     wpm: wpm,
     accuracy: accuracy,
     difficulty: difficulty || difficultySelect.value,
@@ -46,16 +46,20 @@ function sendResultsToMake(name, wpm, accuracy, difficulty) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-  .then(response => {
-    if(response.ok) console.log("Typing test results sent successfully!");
-    else console.error("Failed to send results:", response.statusText);
-  })
-  .catch(err => console.error("Error sending results:", err));
+    .then(response => {
+      if(response.ok){
+        console.log("Results sent to Make.com successfully!");
+      } else {
+        console.error("Failed to send results:", response.statusText);
+      }
+    })
+    .catch(err => console.error("Error sending results:", err));
 }
 
-// ---------------- Start Test ----------------
-async function startTest() {
+// --- Start Test ---
+function startTest() {
   if (!isTyping) {
+    // Prompt for user name
     const namePrompt = prompt("Please enter your name to start the test:");
     if (!namePrompt || namePrompt.trim() === "") {
       alert("Name is required to start the test!");
@@ -63,13 +67,16 @@ async function startTest() {
     }
     userName = namePrompt.trim();
 
-    // Fetch random text
-    const text = await fetchRandomText();
-    textDisplay.innerText = text;
+    // Prompt for user email
+    const emailPrompt = prompt("Please enter your email to receive your results:");
+    if (!emailPrompt || emailPrompt.trim() === "") {
+      alert("Email is required!");
+      return;
+    }
+    userEmail = emailPrompt.trim();
 
     resetTest();
     textInput.disabled = false;
-    textInput.value = "";
     textInput.focus();
     isTyping = true;
     startTime = new Date().getTime();
@@ -78,7 +85,7 @@ async function startTest() {
   }
 }
 
-// ---------------- Timer ----------------
+// --- Update Timer ---
 function updateTimer() {
   if (timeLeft > 0) {
     timeLeft--;
@@ -88,13 +95,13 @@ function updateTimer() {
   }
 }
 
-// ---------------- End Test ----------------
+// --- End Test ---
 function endTest() {
   clearInterval(timer);
   textInput.disabled = true;
   isTyping = false;
 
-  const elapsedTime = (new Date().getTime() - startTime) / 1000 / 60; // in minutes
+  const elapsedTime = (new Date().getTime() - startTime) / 1000 / 60; // minutes
   const wordsTyped = correctChars / 5;
   const wpm = Math.round(wordsTyped / elapsedTime);
   wpmDisplay.textContent = wpm >= 0 ? wpm : 0;
@@ -104,11 +111,11 @@ function endTest() {
 
   saveScore(wpm, accuracy);
 
-  // Send results to Make.com
-  sendResultsToMake(userName, wpm, accuracy, difficultySelect.value);
+  // Send results to Make.com (admin + user)
+  sendResultsToMake(userName, userEmail, wpm, accuracy, difficultySelect.value);
 }
 
-// ---------------- Check Typing ----------------
+// --- Check Typing ---
 function checkTyping() {
   const enteredText = textInput.value;
   const originalWords = textDisplay.textContent.split(" ");
@@ -136,15 +143,14 @@ function checkTyping() {
 
   // Live WPM & Accuracy
   const elapsedTime = (new Date().getTime() - startTime) / 1000 / 60;
-  const wordsTyped = correctChars / 5;
-  const wpm = Math.round(wordsTyped / elapsedTime);
+  const wpm = Math.round((correctChars / 5) / elapsedTime);
   wpmDisplay.textContent = wpm >= 0 ? wpm : 0;
 
   const accuracy = totalTyped > 0 ? (correctChars / totalTyped) * 100 : 100;
   accuracyDisplay.textContent = accuracy.toFixed(2);
 }
 
-// ---------------- Reset Test ----------------
+// --- Reset Test ---
 function resetTest() {
   clearInterval(timer);
   timeLeft = 60;
@@ -156,16 +162,49 @@ function resetTest() {
   totalTyped = 0;
   wpmDisplay.textContent = "0";
   accuracyDisplay.textContent = "100";
+
+  // Fetch random text
+  fetchRandomText().then(text => textDisplay.textContent = text);
 }
 
-// ---------------- Save Score ----------------
+// --- Save Score to Leaderboard ---
 function saveScore(wpm, accuracy) {
   let listItem = document.createElement("li");
   listItem.textContent = `${userName} - WPM: ${wpm}, Accuracy: ${accuracy}%`;
   leaderboardList.appendChild(listItem);
 }
 
-// ---------------- Fetch Random Text ----------------
+// --- Event Listeners ---
+startBtn.addEventListener("click", startTest);
+endBtn.addEventListener("click", endTest);
+resetBtn.addEventListener("click", resetTest);
+textInput.addEventListener("input", checkTyping);
+difficultySelect.addEventListener("change", resetTest);
+
+// --- Smooth Scroll & ScrollSpy ---
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
+
+navLinks.forEach(link => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if(target) target.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    if(scrollY >= section.offsetTop - 100) current = section.getAttribute("id");
+  });
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if(link.getAttribute("href") === `#${current}`) link.classList.add("active");
+  });
+});
+
+// --- Fetch Random Text from API ---
 async function fetchRandomText() {
   try {
     const response = await fetch("https://baconipsum.com/api/?type=meat-and-filler&paras=1");
@@ -177,9 +216,10 @@ async function fetchRandomText() {
   }
 }
 
-// ---------------- Event Listeners ----------------
-startBtn.addEventListener("click", startTest);
-endBtn.addEventListener("click", endTest);
-resetBtn.addEventListener("click", resetTest);
-textInput.addEventListener("input", checkTyping);
-difficultySelect.addEventListener("change", resetTest);
+// --- Start Button (Random Text) ---
+document.getElementById("start-btn").addEventListener("click", async () => {
+  if(!isTyping){
+    const text = await fetchRandomText();
+    textDisplay.innerText = text;
+  }
+});
